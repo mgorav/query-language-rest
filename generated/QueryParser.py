@@ -1,5 +1,3 @@
-# Generated from /Users/paul.rutledge/PyCharmProjects/rsql-python/rest-query-grammar.g4 by ANTLR 4.5.1
-# encoding: utf-8
 from antlr4 import *
 from io import StringIO
 
