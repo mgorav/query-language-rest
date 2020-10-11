@@ -1,6 +1,6 @@
-from gen.QueryParser import *
-from gen.QueryLexer import *
-from gen.QueryVisitor import *
+from generated.QueryParser import *
+from generated.QueryLexer import *
+from generated.QueryVisitor import *
 import ast
 
 class QueryGeneratingVisitor(object):
