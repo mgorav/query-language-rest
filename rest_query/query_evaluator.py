@@ -14,7 +14,7 @@ class QueryGeneratingVisitor(object):
 	def wrap(self, child):
 		raise NotImplementedError
 
-	def comparison(self, key, operator, values):
+	def operator(self, key, operator, values):
 		raise NotImplementedError
 
 
@@ -34,7 +34,7 @@ class Visitor(RsqlVisitor):
 			return self.visit(ctx.node)
 
 	def visitComparison(self, ctx: RsqlParser.ComparisonContext):
-		return self.delegate.comparison(ctx.key.text, ctx.op.text, self.visit(ctx.value))
+		return self.delegate.operator(ctx.key.text, ctx.op.text, self.visit(ctx.value))
 
 	def visitBoolean_value(self, ctx: RsqlParser.Boolean_valueContext):
 		return bool(ctx.getText())

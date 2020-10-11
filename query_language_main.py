@@ -14,7 +14,7 @@ class TinyDBQuerying(QueryGeneratingVisitor):
     def wrap(self, child):
         return (child)
 
-    def comparison(self, key, operator, values):
+    def operator(self, key, operator, values):
         if operator == '==':
             return where(key) == values
         elif operator == '!=':
