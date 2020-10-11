@@ -3,7 +3,7 @@ from tinydb import *
 import operator, functools
 
 
-class TinyDB(QueryGeneratingVisitor):
+class TinyDBQuerying(QueryGeneratingVisitor):
 
     def and_node(self, children):
         return functools.reduce(operator.and_, children)
@@ -37,6 +37,6 @@ class TinyDB(QueryGeneratingVisitor):
             raise NotImplementedError
 
 
-tiny_db_querying = parse("(blah=ex=true;foo=='bar'),someNumber!=3.0", TinyDB())
+tiny_db_querying = parse("(blah=ex=true;foo=='bar'),someNumber!=3.0", TinyDBQuerying())
 
 print(tiny_db_querying)
