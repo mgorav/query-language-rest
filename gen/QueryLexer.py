@@ -1,4 +1,4 @@
-# Generated from /Users/paul.rutledge/PyCharmProjects/rsql-python/rsql-grammar.g4 by ANTLR 4.5.1
+# Generated from /Users/paul.rutledge/PyCharmProjects/rsql-python/rest-query-grammar.g4 by ANTLR 4.5.1
 from antlr4 import *
 from io import StringIO
 
@@ -124,7 +124,7 @@ class RsqlLexer(Lexer):
                   "LTE", "EX", "IDENTIFIER", "NUMERIC_LITERAL", "STRING_LITERAL", 
                   "STRING_ESCAPE_SEQ", "DIGIT" ]
 
-    grammarFileName = "rsql-grammar.g4"
+    grammarFileName = "rest-query-grammar.g4"
 
     def __init__(self, input=None):
         super().__init__(input)

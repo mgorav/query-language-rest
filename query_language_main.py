@@ -1,4 +1,4 @@
-from rsql_python import *
+from rest_query import *
 from tinydb import *
 import operator, functools
 

@@ -1,4 +1,4 @@
-# Generated from /Users/paul.rutledge/PyCharmProjects/rsql-python/rsql-grammar.g4 by ANTLR 4.5.1
+# Generated from /Users/paul.rutledge/PyCharmProjects/rsql-python/rest-query-grammar.g4 by ANTLR 4.5.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -31,7 +31,7 @@ def serializedATN():
 
 class RsqlParser ( Parser ):
 
-    grammarFileName = "rsql-grammar.g4"
+    grammarFileName = "rest-query-grammar.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
