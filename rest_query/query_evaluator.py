@@ -18,28 +18,28 @@ class QueryGeneratingVisitor(object):
 		raise NotImplementedError
 
 
-class Visitor(RsqlVisitor):
+class Visitor(QueryVisitor):
 	def __init__(self, delegate: QueryGeneratingVisitor):
 		self.delegate = delegate
 
-	def visitStatement(self, ctx: RsqlParser.StatementContext):
+	def visitStatement(self, ctx: QueryParser.StatementContext):
 		if ctx.left and ctx.op and ctx.right:
-			if ctx.op.type == RsqlParser.AND_OPERATOR:
+			if ctx.op.type == QueryParser.AND_OPERATOR:
 				return self.delegate.and_node((self.visit(ctx.left), self.visit(ctx.right)))
-			elif ctx.op.type == RsqlParser.OR_OPERATOR:
+			elif ctx.op.type == QueryParser.OR_OPERATOR:
 				return self.delegate.or_node((self.visit(ctx.left), self.visit(ctx.right)))
 		elif ctx.wrapped:
 			return self.delegate.wrap(self.visit(ctx.wrapped))
 		elif ctx.node:
 			return self.visit(ctx.node)
 
-	def visitComparison(self, ctx: RsqlParser.ComparisonContext):
+	def visitComparison(self, ctx: QueryParser.ComparisonContext):
 		return self.delegate.operator(ctx.key.text, ctx.op.text, self.visit(ctx.value))
 
-	def visitBoolean_value(self, ctx: RsqlParser.Boolean_valueContext):
+	def visitBoolean_value(self, ctx: QueryParser.Boolean_valueContext):
 		return bool(ctx.getText())
 
-	def visitSingle_value(self, ctx: RsqlParser.Single_valueContext):
+	def visitSingle_value(self, ctx: QueryParser.Single_valueContext):
 		if ctx.TRUE() or ctx.FALSE():
 			return bool(ctx.getText())
 		elif ctx.NUMERIC_LITERAL():
@@ -55,7 +55,7 @@ class Visitor(RsqlVisitor):
 
 
 def parse(rsql: str, visitor: QueryGeneratingVisitor):
-	lexer = RsqlLexer(InputStream(rsql))
-	parser = RsqlParser(CommonTokenStream(lexer))
+	lexer = QueryLexer(InputStream(rsql))
+	parser = QueryParser(CommonTokenStream(lexer))
 	tree = parser.statement()
 	return tree.accept(Visitor(visitor))

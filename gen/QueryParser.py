@@ -29,7 +29,7 @@ def serializedATN():
         return buf.getvalue()
 
 
-class RsqlParser ( Parser ):
+class QueryParser (Parser):
 
     grammarFileName = "rest-query-grammar.g4"
 
@@ -98,30 +98,30 @@ class RsqlParser ( Parser ):
             self.right = None # StatementContext
 
         def L_PAREN(self):
-            return self.getToken(RsqlParser.L_PAREN, 0)
+            return self.getToken(QueryParser.L_PAREN, 0)
 
         def R_PAREN(self):
-            return self.getToken(RsqlParser.R_PAREN, 0)
+            return self.getToken(QueryParser.R_PAREN, 0)
 
         def statement(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(RsqlParser.StatementContext)
+                return self.getTypedRuleContexts(QueryParser.StatementContext)
             else:
-                return self.getTypedRuleContext(RsqlParser.StatementContext,i)
+                return self.getTypedRuleContext(QueryParser.StatementContext, i)
 
 
         def comparison(self):
-            return self.getTypedRuleContext(RsqlParser.ComparisonContext,0)
+            return self.getTypedRuleContext(QueryParser.ComparisonContext, 0)
 
 
         def AND_OPERATOR(self):
-            return self.getToken(RsqlParser.AND_OPERATOR, 0)
+            return self.getToken(QueryParser.AND_OPERATOR, 0)
 
         def OR_OPERATOR(self):
-            return self.getToken(RsqlParser.OR_OPERATOR, 0)
+            return self.getToken(QueryParser.OR_OPERATOR, 0)
 
         def getRuleIndex(self):
-            return RsqlParser.RULE_statement
+            return QueryParser.RULE_statement
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterStatement" ):
@@ -142,7 +142,7 @@ class RsqlParser ( Parser ):
     def statement(self, _p:int=0):
         _parentctx = self._ctx
         _parentState = self.state
-        localctx = RsqlParser.StatementContext(self, self._ctx, _parentState)
+        localctx = QueryParser.StatementContext(self, self._ctx, _parentState)
         _prevctx = localctx
         _startState = 0
         self.enterRecursionRule(localctx, 0, self.RULE_statement, _p)
@@ -151,15 +151,15 @@ class RsqlParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 16
             token = self._input.LA(1)
-            if token in [RsqlParser.L_PAREN]:
+            if token in [QueryParser.L_PAREN]:
                 self.state = 11
-                self.match(RsqlParser.L_PAREN)
+                self.match(QueryParser.L_PAREN)
                 self.state = 12
                 localctx.wrapped = self.statement(0)
                 self.state = 13
-                self.match(RsqlParser.R_PAREN)
+                self.match(QueryParser.R_PAREN)
 
-            elif token in [RsqlParser.IDENTIFIER]:
+            elif token in [QueryParser.IDENTIFIER]:
                 self.state = 15
                 localctx.node = self.comparison()
 
@@ -175,7 +175,7 @@ class RsqlParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    localctx = RsqlParser.StatementContext(self, _parentctx, _parentState)
+                    localctx = QueryParser.StatementContext(self, _parentctx, _parentState)
                     localctx.left = _prevctx
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_statement)
                     self.state = 18
@@ -185,7 +185,7 @@ class RsqlParser ( Parser ):
                     self.state = 19
                     localctx.op = self._input.LT(1)
                     _la = self._input.LA(1)
-                    if not(_la==RsqlParser.AND_OPERATOR or _la==RsqlParser.OR_OPERATOR):
+                    if not(_la == QueryParser.AND_OPERATOR or _la == QueryParser.OR_OPERATOR):
                         localctx.op = self._errHandler.recoverInline(self)
                     else:
                         self.consume()
@@ -213,49 +213,49 @@ class RsqlParser ( Parser ):
             self.value = None # Single_valueContext
 
         def IDENTIFIER(self):
-            return self.getToken(RsqlParser.IDENTIFIER, 0)
+            return self.getToken(QueryParser.IDENTIFIER, 0)
 
         def single_value(self):
-            return self.getTypedRuleContext(RsqlParser.Single_valueContext,0)
+            return self.getTypedRuleContext(QueryParser.Single_valueContext, 0)
 
 
         def EQ(self):
-            return self.getToken(RsqlParser.EQ, 0)
+            return self.getToken(QueryParser.EQ, 0)
 
         def NE(self):
-            return self.getToken(RsqlParser.NE, 0)
+            return self.getToken(QueryParser.NE, 0)
 
         def GT(self):
-            return self.getToken(RsqlParser.GT, 0)
+            return self.getToken(QueryParser.GT, 0)
 
         def GTE(self):
-            return self.getToken(RsqlParser.GTE, 0)
+            return self.getToken(QueryParser.GTE, 0)
 
         def LT(self):
-            return self.getToken(RsqlParser.LT, 0)
+            return self.getToken(QueryParser.LT, 0)
 
         def LTE(self):
-            return self.getToken(RsqlParser.LTE, 0)
+            return self.getToken(QueryParser.LTE, 0)
 
         def multi_value(self):
-            return self.getTypedRuleContext(RsqlParser.Multi_valueContext,0)
+            return self.getTypedRuleContext(QueryParser.Multi_valueContext, 0)
 
 
         def IN(self):
-            return self.getToken(RsqlParser.IN, 0)
+            return self.getToken(QueryParser.IN, 0)
 
         def NIN(self):
-            return self.getToken(RsqlParser.NIN, 0)
+            return self.getToken(QueryParser.NIN, 0)
 
         def EX(self):
-            return self.getToken(RsqlParser.EX, 0)
+            return self.getToken(QueryParser.EX, 0)
 
         def boolean_value(self):
-            return self.getTypedRuleContext(RsqlParser.Boolean_valueContext,0)
+            return self.getTypedRuleContext(QueryParser.Boolean_valueContext, 0)
 
 
         def getRuleIndex(self):
-            return RsqlParser.RULE_comparison
+            return QueryParser.RULE_comparison
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterComparison" ):
@@ -276,7 +276,7 @@ class RsqlParser ( Parser ):
 
     def comparison(self):
 
-        localctx = RsqlParser.ComparisonContext(self, self._ctx, self.state)
+        localctx = QueryParser.ComparisonContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_comparison)
         self._la = 0 # Token type
         try:
@@ -285,11 +285,11 @@ class RsqlParser ( Parser ):
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 26
-                localctx.key = self.match(RsqlParser.IDENTIFIER)
+                localctx.key = self.match(QueryParser.IDENTIFIER)
                 self.state = 27
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RsqlParser.EQ) | (1 << RsqlParser.NE) | (1 << RsqlParser.GT) | (1 << RsqlParser.LT) | (1 << RsqlParser.GTE) | (1 << RsqlParser.LTE))) != 0)):
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << QueryParser.EQ) | (1 << QueryParser.NE) | (1 << QueryParser.GT) | (1 << QueryParser.LT) | (1 << QueryParser.GTE) | (1 << QueryParser.LTE))) != 0)):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self.consume()
@@ -300,11 +300,11 @@ class RsqlParser ( Parser ):
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 29
-                localctx.key = self.match(RsqlParser.IDENTIFIER)
+                localctx.key = self.match(QueryParser.IDENTIFIER)
                 self.state = 30
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
-                if not(_la==RsqlParser.IN or _la==RsqlParser.NIN):
+                if not(_la == QueryParser.IN or _la == QueryParser.NIN):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self.consume()
@@ -315,9 +315,9 @@ class RsqlParser ( Parser ):
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 32
-                localctx.key = self.match(RsqlParser.IDENTIFIER)
+                localctx.key = self.match(QueryParser.IDENTIFIER)
                 self.state = 33
-                localctx.op = self.match(RsqlParser.EX)
+                localctx.op = self.match(QueryParser.EX)
                 self.state = 34
                 localctx.value = self.boolean_value()
                 pass
@@ -338,13 +338,13 @@ class RsqlParser ( Parser ):
             self.parser = parser
 
         def TRUE(self):
-            return self.getToken(RsqlParser.TRUE, 0)
+            return self.getToken(QueryParser.TRUE, 0)
 
         def FALSE(self):
-            return self.getToken(RsqlParser.FALSE, 0)
+            return self.getToken(QueryParser.FALSE, 0)
 
         def getRuleIndex(self):
-            return RsqlParser.RULE_boolean_value
+            return QueryParser.RULE_boolean_value
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterBoolean_value" ):
@@ -365,14 +365,14 @@ class RsqlParser ( Parser ):
 
     def boolean_value(self):
 
-        localctx = RsqlParser.Boolean_valueContext(self, self._ctx, self.state)
+        localctx = QueryParser.Boolean_valueContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_boolean_value)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 37
             _la = self._input.LA(1)
-            if not(_la==RsqlParser.TRUE or _la==RsqlParser.FALSE):
+            if not(_la == QueryParser.TRUE or _la == QueryParser.FALSE):
                 self._errHandler.recoverInline(self)
             else:
                 self.consume()
@@ -391,19 +391,19 @@ class RsqlParser ( Parser ):
             self.parser = parser
 
         def TRUE(self):
-            return self.getToken(RsqlParser.TRUE, 0)
+            return self.getToken(QueryParser.TRUE, 0)
 
         def FALSE(self):
-            return self.getToken(RsqlParser.FALSE, 0)
+            return self.getToken(QueryParser.FALSE, 0)
 
         def STRING_LITERAL(self):
-            return self.getToken(RsqlParser.STRING_LITERAL, 0)
+            return self.getToken(QueryParser.STRING_LITERAL, 0)
 
         def NUMERIC_LITERAL(self):
-            return self.getToken(RsqlParser.NUMERIC_LITERAL, 0)
+            return self.getToken(QueryParser.NUMERIC_LITERAL, 0)
 
         def getRuleIndex(self):
-            return RsqlParser.RULE_single_value
+            return QueryParser.RULE_single_value
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterSingle_value" ):
@@ -424,14 +424,14 @@ class RsqlParser ( Parser ):
 
     def single_value(self):
 
-        localctx = RsqlParser.Single_valueContext(self, self._ctx, self.state)
+        localctx = QueryParser.Single_valueContext(self, self._ctx, self.state)
         self.enterRule(localctx, 6, self.RULE_single_value)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 39
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RsqlParser.TRUE) | (1 << RsqlParser.FALSE) | (1 << RsqlParser.NUMERIC_LITERAL) | (1 << RsqlParser.STRING_LITERAL))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << QueryParser.TRUE) | (1 << QueryParser.FALSE) | (1 << QueryParser.NUMERIC_LITERAL) | (1 << QueryParser.STRING_LITERAL))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self.consume()
@@ -451,13 +451,13 @@ class RsqlParser ( Parser ):
 
         def single_value(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(RsqlParser.Single_valueContext)
+                return self.getTypedRuleContexts(QueryParser.Single_valueContext)
             else:
-                return self.getTypedRuleContext(RsqlParser.Single_valueContext,i)
+                return self.getTypedRuleContext(QueryParser.Single_valueContext, i)
 
 
         def getRuleIndex(self):
-            return RsqlParser.RULE_multi_value
+            return QueryParser.RULE_multi_value
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterMulti_value" ):
@@ -478,24 +478,24 @@ class RsqlParser ( Parser ):
 
     def multi_value(self):
 
-        localctx = RsqlParser.Multi_valueContext(self, self._ctx, self.state)
+        localctx = QueryParser.Multi_valueContext(self, self._ctx, self.state)
         self.enterRule(localctx, 8, self.RULE_multi_value)
         self._la = 0 # Token type
         try:
             self.state = 53
             token = self._input.LA(1)
-            if token in [RsqlParser.L_PAREN]:
+            if token in [QueryParser.L_PAREN]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 41
-                self.match(RsqlParser.L_PAREN)
+                self.match(QueryParser.L_PAREN)
                 self.state = 42
                 self.single_value()
                 self.state = 47
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while _la==RsqlParser.OR_OPERATOR:
+                while _la==QueryParser.OR_OPERATOR:
                     self.state = 43
-                    self.match(RsqlParser.OR_OPERATOR)
+                    self.match(QueryParser.OR_OPERATOR)
                     self.state = 44
                     self.single_value()
                     self.state = 49
@@ -503,9 +503,9 @@ class RsqlParser ( Parser ):
                     _la = self._input.LA(1)
 
                 self.state = 50
-                self.match(RsqlParser.R_PAREN)
+                self.match(QueryParser.R_PAREN)
 
-            elif token in [RsqlParser.TRUE, RsqlParser.FALSE, RsqlParser.NUMERIC_LITERAL, RsqlParser.STRING_LITERAL]:
+            elif token in [QueryParser.TRUE, QueryParser.FALSE, QueryParser.NUMERIC_LITERAL, QueryParser.STRING_LITERAL]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 52
                 self.single_value()

@@ -80,7 +80,7 @@ def serializedATN():
         return buf.getvalue()
 
 
-class RsqlLexer(Lexer):
+class QueryLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
