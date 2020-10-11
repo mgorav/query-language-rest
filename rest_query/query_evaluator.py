@@ -3,7 +3,7 @@ from generated.QueryLexer import *
 from generated.QueryVisitor import *
 import ast
 
-class QueryGeneratingVisitor(object):
+class QueryVisitor(object):
 
 	def and_node(self, children):
 		raise NotImplementedError
@@ -19,7 +19,7 @@ class QueryGeneratingVisitor(object):
 
 
 class Visitor(QueryVisitor):
-	def __init__(self, delegate: QueryGeneratingVisitor):
+	def __init__(self, delegate: QueryVisitor):
 		self.delegate = delegate
 
 	def visitStatement(self, ctx: QueryParser.StatementContext):
@@ -54,7 +54,7 @@ class Visitor(QueryVisitor):
 			raise NotImplementedError
 
 
-def parse(rsql: str, visitor: QueryGeneratingVisitor):
+def parse(rsql: str, visitor: QueryVisitor):
 	lexer = QueryLexer(InputStream(rsql))
 	parser = QueryParser(CommonTokenStream(lexer))
 	tree = parser.statement()

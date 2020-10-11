@@ -3,7 +3,7 @@ from tinydb import *
 import operator, functools
 
 
-class TinyDBQuerying(QueryGeneratingVisitor):
+class TinyDBQuerying(QueryVisitor):
 
     def and_node(self, children):
         return functools.reduce(operator.and_, children)
