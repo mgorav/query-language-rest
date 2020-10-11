@@ -1,4 +1,4 @@
-### REST end point query lanage
+### REST end point query language
 
 REST query language
 ### Grammar
